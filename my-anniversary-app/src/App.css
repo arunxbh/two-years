@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Roboto+Slab:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 .App {
   text-align: center;
 }
@@ -7,6 +10,10 @@
   pointer-events: none;
 }
 
+body {
+  font-family: 'Press Start 2P', cursive;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -14,7 +21,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #381837;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -36,3 +43,205 @@
     transform: rotate(360deg);
   }
 }
+
+.homePage {
+  position: relative;
+  height: 100vh;
+  background-color: #f0eae0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mailIcon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #ffb7c5;
+  color: #432b49;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 100; /* Ensure it's above the parchment menu */
+}
+
+.parchmentMenu {
+  position: absolute; /* Changed to absolute for centering in the flex container */
+  width: 50%; /* Adjust width as needed */
+  max-width: 600px; /* Set a max-width for larger screens */
+  height: 70%; /* Adjust height as needed */
+  top: 15%;
+  right: 5%;
+  background-color: #fff5e4;
+  border: 2px solid #000000;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center the text vertically */
+  text-align: left; /* Center the text horizontally */
+  overflow-y: auto; /* Add scroll for longer texts */
+}
+
+.parchmentMenu p {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1%;
+  margin: 0; /* Remove default margins */
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.letterContent {
+  font-family: 'Merriweather', serif;
+  text-align: left;
+  line-height: 1.6; /* Improve readability */
+}
+
+.letterContent h2, .letterContent p {
+  margin-bottom: 1em; /* Add some space between paragraphs and header */
+}
+
+.letterContent h2 {
+  font-family: 'Roboto Slab', serif;
+  margin-top: 0;
+  font-weight: 700; /* Use bold weight for the header */
+}
+
+.letterContent p {
+  font-weight: 400; /* Regular weight for the body text */
+}
+
+.timer {
+  position: fixed;
+  bottom: 0px; /* Adjust based on your layout */
+  left: 10px;
+  width: 100%;
+  text-align: left;
+  font-size: 8px;
+  color: #432b49;
+  padding: 10px;
+  background-color: transparent;
+}
+
+.emotionContainer {
+  position: absolute;
+  top: 75%;
+  left: 2%;
+  transform: translateY(-50%);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.emotionText {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.emotionButtons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Creates a 3x3 grid */
+  gap: 10px; /* Space between buttons */
+}
+
+.emotionButton {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.selectedEmotionDisplay p {
+  margin-top: 20px;
+  font-size: 20px;
+  color: #333;
+}
+
+.emotionButton {
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #555; /* Darker text for better contrast */
+  background-color: #f9f9f9;
+  border: 2px solid #ddd; /* Subtle borders */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth transition for visual effects */
+  outline: none; /* Remove focus outline */
+}
+
+.emotionButton:hover {
+  background-color: #e7e7e7; /* Slightly darker on hover */
+}
+
+.emotionButton.selected {
+  color: #fff; /* White text for selected button */
+  background-color: #764f80; /* Highlight color for selected state */
+  border-color: #ffffff; /* Darker border for contrast */
+}
+
+@keyframes highlight {
+  0% {
+    background-color: #764f80; /* Start with highlight color */
+    color: #fff;
+  }
+  100% {
+    background-color: #f9f9f9; /* End with original background color */
+    color: #555; /* Return to original text color */
+  }
+}
+
+.emotionButton {
+  padding: 10px 15px;
+  font-size: 16px;
+  color: #555;
+  background-color: #f9f9f9;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.emotionButton:hover {
+  background-color: #e7e7e7;
+}
+
+.emotionButton.animate {
+  animation: highlight 0.5s forwards; /* Use forwards to retain the final state */
+}
+
+.homeBackground {
+  min-height: 100vh;
+  background-image: url('./content/gifmain.gif'); /* Correct relative path from the src directory */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.emotionButton, .emotionText, .timer {
+  font-family: 'Press Start 2P', cursive;
+}
+
+.emotionText {
+  font-size: 1.2rem; /* Adjust size as needed */
+  color: rgb(255, 255, 255);
+}
+
+.emotionButton {
+  font-size: 0.8rem; /* Adjust size as needed */
+}
+
+
