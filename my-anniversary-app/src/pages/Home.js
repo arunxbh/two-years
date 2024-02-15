@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FiMail, FiX } from "react-icons/fi";
+import { FiMail, FiX, FiInfo } from "react-icons/fi";
 
 function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -8,6 +8,7 @@ function HomePage() {
   const [content, setContent] = useState(null); // This will hold the API response content
   const [frameVisible, setFrameVisible] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
+  const [isInfoOpen, setIsInfoOpen] = useState(false);
 
   useEffect(() => {
     const calculateTimePassed = () => {
@@ -124,6 +125,28 @@ function HomePage() {
 
   return (
     <div className="homeBackground">
+      <button className="infoIcon" onClick={() => setIsInfoOpen(!isInfoOpen)}>
+        <FiInfo size={24} />
+      </button>
+
+      {isInfoOpen && (
+        <div className="infoFrame">
+          <button
+            className="closeFrameButton"
+            onClick={() => setIsInfoOpen(false)}
+          >
+            <FiX size={24} />
+          </button>
+          <div className="infoContent">
+            <p>I love you Jessica! Happy anniversary :)</p>
+            <p>If anything ever breaks, send an email to: aas363@cornell.edu</p>
+            <p>
+              All rights reserved by Arunabh Sarkar <br />
+              Copyright © 2024
+            </p>
+          </div>
+        </div>
+      )}
       <div className="emotionContainer">
         <div className="emotionText">Hi Jessica! How are you feeling?</div>
         <div className="emotionButtons">

@@ -368,4 +368,39 @@ body {
   border-color: #ffffff;
 }
 
-/* If you have any media queries or responsive design, ensure to update there as well */
+.infoIcon {
+  position: fixed;
+  top: 3px;
+  left: 2px;
+  background-color: transparent;
+  color: #432b49;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 100; /* Ensure it's above the parchment menu */
+}
+
+.infoFrame {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 30%; /* Adjust width as needed */
+  background-color: #fff5e4;
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  overflow-y: auto;
+  z-index: 100; /* Make sure it's above other content */
+}
+
+.infoContent p {
+  font-family: 'Press Start 2P';
+  font-size: 0.5rem; /* Adjust size as needed */
+  margin-bottom: 1em; /* Add some space between paragraphs */
+}
