@@ -5,6 +5,9 @@ function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [timePassed, setTimePassed] = useState("");
   const [selectedEmotion, setSelectedEmotion] = useState(""); // State to track the selected emotion
+  const [content, setContent] = useState(null); // This will hold the API response content
+  const [frameVisible, setFrameVisible] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false);
 
   useEffect(() => {
     const calculateTimePassed = () => {
@@ -58,17 +61,65 @@ function HomePage() {
   }, []);
 
   const handleEmotionClick = (emotion) => {
-    setSelectedEmotion(emotion); // Optionally use the emotion state for other purposes
+    setSelectedEmotion(emotion);
+    setShowAnswer(false); // Hide the answer when a new emotion is clicked
+    setContent(null); // Clear previous content
+    setFrameVisible(true); // Show the frame
 
-    const buttons = document.querySelectorAll(".emotionButton");
-    buttons.forEach((button) => {
-      if (button.textContent === emotion) {
-        button.classList.add("animate");
-        setTimeout(() => {
-          button.classList.remove("animate"); // Remove the class after the animation
-        }, 500); // Match the duration of the CSS animation
-      }
-    });
+    switch (emotion) {
+      case "Curious":
+        fetchRiddle();
+        break;
+      case "Overwhelmed":
+        fetchDogImage();
+        break;
+      // Add other cases for different emotions and their corresponding API calls
+    }
+  };
+
+  const fetchRiddle = () => {
+    fetch("https://riddles-api.vercel.app/random")
+      .then((response) => response.json())
+      .then((data) => {
+        setContent({
+          type: "riddle",
+          text: data.riddle,
+          answer: data.answer,
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching riddle:", error);
+        setContent({
+          type: "error",
+          text: "Failed to fetch riddle.",
+        });
+      });
+  };
+
+  const fetchDogImage = () => {
+    fetch("https://dog.ceo/api/breeds/image/random")
+      .then((response) => response.json())
+      .then((data) => {
+        setContent({
+          type: "image",
+          url: data.message, // Assuming the API returns the image URL in the message field
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching dog image:", error);
+        setContent({
+          type: "error",
+          text: "Failed to fetch dog image.",
+        });
+      });
+  };
+
+  const closeFrame = () => {
+    setFrameVisible(false);
+  };
+
+  const toggleAnswerVisibility = () => {
+    setShowAnswer(!showAnswer);
   };
 
   return (
@@ -76,17 +127,7 @@ function HomePage() {
       <div className="emotionContainer">
         <div className="emotionText">Hi Jessica! How are you feeling?</div>
         <div className="emotionButtons">
-          {[
-            "Happy",
-            "Sad",
-            "Tired",
-            "Stressed",
-            "Lonely",
-            "Hungry",
-            "Annoyed",
-            "Mad",
-            "Overwhelmed",
-          ].map((emotion) => (
+          {["Bored", "Curious", "Nostalgic", "Overwhelmed"].map((emotion) => (
             <button
               key={emotion}
               className={`emotionButton ${
@@ -99,6 +140,38 @@ function HomePage() {
           ))}
         </div>
       </div>
+      {frameVisible && (
+        <div className="contentFrame">
+          <button onClick={closeFrame} className="closeFrameButton">
+            <FiX size={24} />
+          </button>
+          <div className="content">
+            {/* Render different content based on the content state */}
+            {content && content.type === "riddle" && (
+              <>
+                <p>{content.text}</p>
+                {showAnswer && <p>{content.answer}</p>}
+                <button
+                  onClick={toggleAnswerVisibility}
+                  className="emotionButton"
+                >
+                  {showAnswer ? "Hide Answer" : "Show Answer"}
+                </button>
+              </>
+            )}
+            {content && content.type === "image" && (
+              <div className="imageContainer">
+                <div className="imageText">Here's a cutie picta :)</div>
+                <img
+                  src={content.url}
+                  alt="A cute animal"
+                  className="contentImage"
+                />
+              </div>
+            )}{" "}
+          </div>
+        </div>
+      )}
       <button className="mailIcon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         <FiMail size={24} />
       </button>

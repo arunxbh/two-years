@@ -150,7 +150,7 @@ body {
 
 .emotionButtons {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Creates a 3x3 grid */
+  grid-template-columns: repeat(2, 1fr); /* Creates a 3x3 grid */
   gap: 10px; /* Space between buttons */
 }
 
@@ -240,8 +240,132 @@ body {
   color: rgb(255, 255, 255);
 }
 
+.imageText {
+  font-size: 1.2rem; /* Adjust size as needed */
+  color: #333;
+  font-family: 'Press Start 2P', cursive;
+  padding: 20px;
+}
+
 .emotionButton {
   font-size: 0.8rem; /* Adjust size as needed */
 }
 
 
+.emotionButtonsAndRiddle {
+  display: flex;
+  align-items: flex-start; /* Aligns items at the top */
+}
+
+.riddleBox {
+  margin-left: 20px; /* Spacing between buttons and riddle box */
+  padding: 10px;
+  border: 1px solid #ccc;
+  width: 200px; /* Or however wide you want it to be */
+  height: auto; /* Adjust the height as needed */
+  background-color: #ffffff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Press Start 2P', cursive; /* Or any other font you're using */
+  font-size: 0.5rem; /* Adjust font size as needed */
+  color: #333;
+  overflow-wrap: break-word; /* Ensures text wraps within the box */
+}
+
+.showAnswerButton {
+  margin-top: 10px;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  outline: none;
+}
+
+.showAnswerButton:hover {
+  background-color: #e7e7e7;
+}
+
+.riddleAnswer {
+  margin-top: 10px;
+  padding: 5px;
+  border-top: 1px solid #ccc;
+  font-size: 0.8rem;
+}
+
+.contentFrame {
+  position: fixed;
+  top: 50%;
+  left: 75%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 600px;
+  background: #fff5e4;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 20px;
+  z-index: 1000; /* Make sure it's above other content */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow-y: auto; /* In case content is very long */
+}
+
+.closeFrameButton {
+  margin-left: auto; /* Aligns the button to the right */
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.content {
+  width: 100%;
+  /* Add other styles as needed */
+}
+
+.imageContainer {
+  width: 100%; /* Adjust as needed */
+  text-align: center; /* Center image in the div */
+  margin-top: 20px; /* Add some space above the image */
+}
+
+.contentImage {
+  max-width: 100%; /* Ensure it fits in the frame */
+  max-height: 400px;
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 8px; /* Optional, for styled corners */
+}
+
+.emotionButtons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Keeps the 2x2 grid */
+  gap: 20px; /* Increase the space between buttons if needed */
+  justify-content: center; /* Center the buttons in the grid area */
+  align-items: center;
+}
+
+.emotionButton {
+  padding: 20px 30px; /* Increase padding for larger buttons */
+  font-size: 1rem; /* Increase font size for better readability */
+  background-color: #f9f9f9;
+  border: 3px solid #ddd; /* Make the border thicker if desired */
+  border-radius: 10px; /* Adjust border-radius for a more rounded look */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  min-width: 150px; /* You can set a minimum width */
+  box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+.emotionButton:hover {
+  background-color: #e7e7e7; /* Slightly darker on hover */
+}
+
+.emotionButton.selected {
+  color: #fff;
+  background-color: #764f80;
+  border-color: #ffffff;
+}
+
+/* If you have any media queries or responsive design, ensure to update there as well */
