@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FiMail, FiX, FiInfo } from "react-icons/fi";
+import { Bs8Circle } from "react-icons/bs";
 
 function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,6 +63,7 @@ function HomePage() {
   }, []);
 
   const handleEmotionClick = (emotion) => {
+    setIsMenuOpen(false);
     setSelectedEmotion(emotion);
     setShowAnswer(false); // Hide the answer when a new emotion is clicked
     setContent(null); // Clear previous content
@@ -72,7 +74,7 @@ function HomePage() {
         fetchRiddle();
         break;
       case "Overwhelmed":
-        fetchDogImage();
+        fetchAnimalImage(); // Call the new function to fetch a random animal image
         break;
       // Add other cases for different emotions and their corresponding API calls
     }
@@ -97,20 +99,37 @@ function HomePage() {
       });
   };
 
-  const fetchDogImage = () => {
-    fetch("https://dog.ceo/api/breeds/image/random")
+  const fetchAnimalImage = () => {
+    // Array of API URLs
+    const apiUrls = [
+      "https://dog.ceo/api/breeds/image/random", // Dog API
+      "https://cataas.com/cat?json=true", // Cat API (adjusted to return JSON)
+    ];
+
+    // Select a random API URL
+    const randomApiUrl = apiUrls[Math.floor(Math.random() * apiUrls.length)];
+
+    fetch(randomApiUrl)
       .then((response) => response.json())
       .then((data) => {
+        // Depending on the API, the image URL is in a different field
+        let imageUrl;
+        if (randomApiUrl.includes("dog.ceo")) {
+          imageUrl = data.message; // For dog API
+        } else if (randomApiUrl.includes("cataas.com")) {
+          imageUrl = `https://cataas.com/cat/${data._id}`;
+        }
+
         setContent({
           type: "image",
-          url: data.message, // Assuming the API returns the image URL in the message field
+          url: imageUrl, // Set the correct image URL
         });
       })
       .catch((error) => {
-        console.error("Error fetching dog image:", error);
+        console.error("Error fetching animal image:", error);
         setContent({
           type: "error",
-          text: "Failed to fetch dog image.",
+          text: "Failed to fetch animal image.",
         });
       });
   };
@@ -191,10 +210,12 @@ function HomePage() {
                   className="contentImage"
                 />
               </div>
-            )}{" "}
+            )}
+            {content && content.type === "reading" && <p>{content.text}</p>}
           </div>
         </div>
       )}
+
       <button className="mailIcon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         <FiMail size={24} />
       </button>
