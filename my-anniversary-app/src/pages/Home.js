@@ -492,7 +492,7 @@ function HomePage() {
                 <p>
                   You're bored? Ok first of all, TEXT ME! If I don't answer...
                 </p>
-                <p>Try this activity: {content.activity}</p>
+                <h3>Try this activity: {content.activity}</h3>
                 <p>
                   You will need {content.participants} participants for this
                   activity.
@@ -516,7 +516,7 @@ function HomePage() {
             )}
             {content && content.type === "fact" && (
               <>
-                <p>{"Here's a fun fact that you may not know!"}</p>
+                <h3>{"Here's a fun fact that you may not know!"}</h3>
                 <p>{content.text}</p>
               </>
             )}
