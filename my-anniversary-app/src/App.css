@@ -455,11 +455,60 @@ body {
   bottom: 35%; /* Adjust based on your layout */
   left: 52%; /* Center horizontally */
   transform: translateX(-50%); /* Adjust centering based on the actual size of your images */
-  z-index: 10; /* Ensure it's above other content if necessary */
 }
 
 .avatar {
   width: 100px; /* Adjust based on your needs */
   height: auto; /* Maintain aspect ratio */
   margin: 0 -25px; /* Adjust spacing between avatars */
+}
+.parchmentMenu form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Adjust the gap as needed */
+}
+
+.passwordInput {
+  font-family: 'Press Start 2P', cursive;
+  padding: 5px;
+  margin-bottom: 10px; /* Add space below the input */
+  font-size: 1rem; /* Adjust to match the size in your project */
+  border: 2px solid #ccc; /* Example border, adjust as needed */
+  border-radius: 4px; /* Optional: round the corners of the input box */
+}
+
+.submitPasswordButton {
+  font-family: 'Press Start 2P', cursive;
+  padding: 10px 15px;
+  font-size: 0.8rem; /* Adjust size as needed */
+  color: #555; /* Darker text for better contrast */
+  background-color: #f9f9f9;
+  border: 2px solid #ddd; /* Subtle borders */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth transition for visual effects */
+  outline: none; /* Remove focus outline */
+  margin-bottom: 10px; /* Space below the button */
+  min-width: 150px; /* Set a minimum width */
+  box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+.submitPasswordButton:hover {
+  background-color: #e7e7e7; /* Slightly darker on hover */
+}
+
+.submitPasswordButton:active {
+  background-color: #764f80; /* Change color when clicked */
+  color: #fff; /* White text for active state */
+  border-color: #ffffff; /* Darker border for contrast */
+}
+
+
+.passwordError {
+  color: red;
+  font-family: 'Press Start 2P', cursive;
+  margin-top: 10px; /* This will push the error message lower */
+  font-size: 0.8rem; /* Adjust to match the size in your project */
+  text-align: center;
 }

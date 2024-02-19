@@ -15,6 +15,9 @@ function HomePage() {
   const [frameVisible, setFrameVisible] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
+  const [isPasswordProtected, setIsPasswordProtected] = useState(true);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   useEffect(() => {
     const calculateTimePassed = () => {
@@ -126,6 +129,17 @@ function HomePage() {
         fetchYoutubeVideo();
         break;
       // Add other cases for different emotions and their corresponding API calls
+    }
+  };
+
+  const handlePasswordCheck = (event) => {
+    event.preventDefault(); // Prevent form from submitting and refreshing the page
+    if (passwordInput.trim() === "5559") {
+      setIsPasswordProtected(false);
+      setPasswordError("");
+    } else {
+      setPasswordError("Incorrect");
+      setPasswordInput(""); // Clear password input if incorrect
     }
   };
 
@@ -528,19 +542,79 @@ function HomePage() {
           <button className="closeButton" onClick={() => setIsMenuOpen(false)}>
             <FiX size={24} />
           </button>
-
-          <div className="letterContent">
-            <p>To Jessica,</p>
-            <p>
-              Happy 2 Year Anniversary!
+          {isPasswordProtected ? (
+            <>
+              <form onSubmit={handlePasswordCheck}>
+                <input
+                  type="password"
+                  value={passwordInput}
+                  onChange={(e) => setPasswordInput(e.target.value)}
+                  placeholder="Enter password"
+                  className="passwordInput"
+                />
+                <button type="submit" className="submitPasswordButton">
+                  Submit
+                </button>
+              </form>
+              {passwordError && (
+                <p className="passwordError">{passwordError}</p>
+              )}
+            </>
+          ) : (
+            <div className="letterContent">
+              <p></p>
               <br />
-            </p>
-            <p>
-              Love,
               <br />
-              Arunabh
-            </p>
-          </div>
+              <p>
+                <p>To Jessica,</p>
+                <br /> As I sit down to write this letter, my mind is flooded
+                with memories of our journey together. Each moment we've shared
+                is a precious thread in the tapestry of our story, a story that
+                began with a shy hello and blossomed into a life shared in love.
+                <br />
+                <br /> I remember the laughter that filled the air on our first
+                date, a sound so sweet it still echoes in my heart. Those early
+                days were like a dance, each step bringing us closer, each twirl
+                revealing more of who we are.
+                <br />
+                <br /> With every challenge we faced, we found strength in each
+                other. Our love, a beacon of hope, guided us through storms and
+                led us to clearer skies. Your resilience inspires me, your
+                kindness lifts me, and your love sustains me.
+                <br />
+                <br /> The way you smile, the way you care, the way you give so
+                selflessly, it all makes me fall in love with you more every
+                day. You are my rock, my comfort, and my endless joy.
+                <br />
+                <br /> The quiet moments we share, simple and unassuming, have
+                become my sanctuary. Whether it's a whispered word or a silent
+                embrace, these are the times when I feel our souls speak the
+                same language.
+                <br />
+                <br />
+                Our love is a canvas painted with vibrant colors of joy, deep
+                hues of passion, and gentle strokes of understanding. Each day
+                adds another brushstroke, another memory, another reason to love
+                you.
+                <br />
+                <br /> On this special day, I want to promise you again, my
+                heart, my loyalty, and my life. You are my past, my present, and
+                my future. There's nothing we can't face together.
+                <br />
+                <br /> As I write the closing lines of this letter, know that it
+                is not an end, but a continuation. Our journey is still
+                unfolding, and I look forward to every step, every challenge,
+                and every triumph with you by my side.
+                <br />
+              </p>
+              <br />
+              <p>
+                Love,
+                <br />
+                Arunabh
+              </p>{" "}
+            </div>
+          )}
         </div>
       )}
     </div>
