@@ -338,6 +338,7 @@ body {
   border-radius: 8px; /* Optional, for styled corners */
 }
 
+
 .emotionButtons {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Keeps the 2x2 grid */

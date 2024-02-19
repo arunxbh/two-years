@@ -69,18 +69,100 @@ function HomePage() {
     setContent(null); // Clear previous content
     setFrameVisible(true); // Show the frame
 
+    const fetchFunFact = () => {
+      fetch("https://uselessfacts.jsph.pl/api/v2/facts/random")
+        .then((response) => response.json())
+        .then((data) => {
+          setContent({
+            type: "fact",
+            text: data.text,
+            source: data.source,
+            source_url: data.source_url,
+          });
+        })
+        .catch((error) => {
+          console.error("Error fetching fun fact:", error);
+          setContent({
+            type: "error",
+            text: "Failed to fetch fun fact.",
+          });
+        });
+    };
+
     switch (emotion) {
+      case "Bored":
+        const isActivity = Math.random() < 0.5; // 50% chance for each
+        if (isActivity) {
+          fetchBoredActivity();
+        } else {
+          fetchDrinkRecipe();
+        }
+        break;
       case "Curious":
-        fetchRiddle();
+        const isRiddle = Math.random() < 0.5; // Randomly choose between riddle and fun fact
+        if (isRiddle) {
+          fetchRiddle();
+        } else {
+          fetchFunFact();
+        }
         break;
       case "Overwhelmed":
-        fetchAnimalImage(); // Call the new function to fetch a random animal image
+        fetchAnimalImage();
         break;
       case "Nostalgic":
         fetchYoutubeVideo();
         break;
       // Add other cases for different emotions and their corresponding API calls
     }
+  };
+
+  const fetchDrinkRecipe = () => {
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php")
+      .then((response) => response.json())
+      .then((data) => {
+        const drink = data.drinks[0];
+        setContent({
+          type: "drink",
+          name: drink.strDrink,
+          category: drink.strCategory,
+          instructions: drink.strInstructions,
+          ingredients: Object.keys(drink)
+            .filter((key) => key.startsWith("strIngredient") && drink[key])
+            .map((ingredient) => drink[ingredient]),
+          measures: Object.keys(drink)
+            .filter((key) => key.startsWith("strMeasure") && drink[key])
+            .map((measure) => drink[measure]),
+          image: drink.strDrinkThumb,
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching drink recipe:", error);
+        setContent({
+          type: "error",
+          text: "Failed to fetch drink recipe.",
+        });
+      });
+  };
+
+  const fetchBoredActivity = () => {
+    fetch("https://www.boredapi.com/api/activity/")
+      .then((response) => response.json())
+      .then((data) => {
+        setContent({
+          type: "activity",
+          activity: data.activity,
+          participants: data.participants,
+          price: data.price,
+          link: data.link,
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching activity:", error);
+        setContent({
+          type: "error",
+          text: "Failed to fetch activity.",
+        });
+      });
   };
 
   const fetchYoutubeVideo = () => {
@@ -107,6 +189,26 @@ function HomePage() {
         setContent({
           type: "error",
           text: "Failed to fetch riddle.",
+        });
+      });
+  };
+
+  const fetchFunFact = () => {
+    fetch("https://uselessfacts.jsph.pl/api/v2/facts/random")
+      .then((response) => response.json())
+      .then((data) => {
+        setContent({
+          type: "fact",
+          text: data.text,
+          source: data.source,
+          source_url: data.source_url,
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching fun fact:", error);
+        setContent({
+          type: "error",
+          text: "Failed to fetch fun fact.",
         });
       });
   };
@@ -211,6 +313,65 @@ function HomePage() {
                 >
                   {showAnswer ? "Hide Answer" : "Show Answer"}
                 </button>
+              </>
+            )}
+            {content && content.type === "drink" && (
+              <>
+                <p>You're bored? </p>
+                <p>Well, it's 5pm somewhere!</p>
+                <h3>Let's make a {content.name}!</h3>
+                <p>This drink is a {content.category}</p>
+                <h4>Ingredients and Instructions:</h4>
+                <ul>
+                  {content.ingredients.map((ingredient, index) => (
+                    <li key={index}>
+                      {ingredient} {content.measures[index]}
+                    </li>
+                  ))}
+                  <p>{content.instructions}</p>
+                </ul>
+                <h4>The finished product should look like this:</h4>
+                {content.image && (
+                  <img
+                    src={content.image}
+                    alt={content.name}
+                    className="contentImage"
+                  />
+                )}
+              </>
+            )}
+
+            {content && content.type === "activity" && (
+              <>
+                <p>
+                  You're bored??? Ok first of all, TEXT ME! If I don't answer...
+                </p>
+                <p>Try this activity: {content.activity}</p>
+                <p>
+                  You will need {content.participants} participants for this
+                  activity.
+                </p>
+                <p>
+                  and it will you{" "}
+                  {content.price === 0 ? "nothing" : content.price} dollars!
+                </p>
+                {content.link && (
+                  <p>
+                    <a
+                      href={content.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Here's a link to find out more
+                    </a>
+                  </p>
+                )}
+              </>
+            )}
+            {content && content.type === "fact" && (
+              <>
+                <p>{"Here's a fun fact that you may not know!"}</p>
+                <p>{content.text}</p>
               </>
             )}
             {content && content.type === "image" && (
