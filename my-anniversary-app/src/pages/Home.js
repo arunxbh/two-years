@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { FiMail, FiX, FiInfo } from "react-icons/fi";
 import youtubeData from "../content/video_ids.json";
 
+// 972212fd000b41b9bfcf33a1eaa6be23 API key for https://newsapi.org/docs/endpoints/everything, embed later in new button on "all knowing button"
+
 function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [timePassed, setTimePassed] = useState("");
@@ -91,11 +93,14 @@ function HomePage() {
 
     switch (emotion) {
       case "Bored":
-        const isActivity = Math.random() < 0.5; // 50% chance for each
+        const isActivity = Math.random() < 0.33; // One third chance for each
+        const isDrink = Math.random() < 0.5; // Adjust the randomization logic if necessary
         if (isActivity) {
           fetchBoredActivity();
-        } else {
+        } else if (isDrink) {
           fetchDrinkRecipe();
+        } else {
+          fetchJoke();
         }
         break;
       case "Curious":
@@ -107,13 +112,67 @@ function HomePage() {
         }
         break;
       case "Overwhelmed":
-        fetchAnimalImage();
+        const isAnimal = Math.random() < 0.5; // 50% chance for each
+        if (isAnimal) {
+          fetchAnimalImage();
+        } else {
+          fetchAdvice();
+        }
         break;
       case "Nostalgic":
         fetchYoutubeVideo();
         break;
       // Add other cases for different emotions and their corresponding API calls
     }
+  };
+
+  const fetchAdvice = () => {
+    fetch("https://api.adviceslip.com/advice")
+      .then((response) => response.json())
+      .then((data) => {
+        setContent({
+          type: "advice",
+          advice: data.slip.advice,
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching advice:", error);
+        setContent({
+          type: "error",
+          text: "Failed to fetch advice.",
+        });
+      });
+  };
+
+  const fetchJoke = () => {
+    fetch("https://v2.jokeapi.dev/joke/Any")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          throw new Error("Joke API returned an error");
+        }
+
+        if (data.type === "twopart") {
+          setContent({
+            type: "joke-twopart",
+            setup: data.setup,
+            delivery: data.delivery,
+          });
+        } else {
+          // If it's a single-part joke
+          setContent({
+            type: "joke-single",
+            joke: data.joke,
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching joke:", error);
+        setContent({
+          type: "error",
+          text: "Failed to fetch joke.",
+        });
+      });
   };
 
   const fetchDrinkRecipe = () => {
@@ -315,6 +374,38 @@ function HomePage() {
                 </button>
               </>
             )}
+            {content && content.type === "joke-twopart" && (
+              <>
+                <h3>Jokersville</h3>
+                <p>
+                  You're bored? Ok well, we all know I am the funny one in the
+                  relationship, so just imagine my voice when reading this joke
+                  and try not to laugh too hard!
+                </p>
+                <p>{content.setup}</p>
+                {showAnswer && <p>{content.delivery}</p>}
+                <button
+                  onClick={() => setShowAnswer(!showAnswer)}
+                  className="emotionButton"
+                >
+                  {showAnswer ? "Hide Punchline" : "Show Punchline"}
+                </button>
+              </>
+            )}
+
+            {content && content.type === "joke-single" && <p>{content.joke}</p>}
+            {content && content.type === "advice" && (
+              <>
+                <h3>Advice Hub:</h3>
+                <p>Feeling overwhelmed? Here is some advice:</p>
+                <p>{content.advice}</p>
+                <p>
+                  Remember to take your time and slow down! You have made it
+                  this far. You can always call me if you need anything. I love
+                  you!
+                </p>
+              </>
+            )}
             {content && content.type === "drink" && (
               <>
                 <p>You're bored? </p>
@@ -344,7 +435,7 @@ function HomePage() {
             {content && content.type === "activity" && (
               <>
                 <p>
-                  You're bored??? Ok first of all, TEXT ME! If I don't answer...
+                  You're bored? Ok first of all, TEXT ME! If I don't answer...
                 </p>
                 <p>Try this activity: {content.activity}</p>
                 <p>
