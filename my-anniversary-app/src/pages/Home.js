@@ -350,7 +350,24 @@ function HomePage() {
             <FiX size={24} />
           </button>
           <div className="infoContent">
-            <p>I love you Jessica! Happy anniversary :)</p>
+            <p>To use this website:</p>
+            <p>
+              - The four buttons on the main page all do differnt things, to
+              refresh or get new results, click the button again!
+              <br />- The lightbulb button on the bottom right will give you a
+              bunch of articles about any topic you want to learn about! Just
+              type in a keyword and you will get as much information as one
+              could ever desire.
+              <br />- The 8-ball button on the bottom right corner is for
+              whenever you are feeling indecisive! Click it to get a second
+              opinion
+              <br />- I have written a private letter to you, to view: click the
+              mail icon in the bottom right corner and use the same passcode you
+              use to unlock your phone!
+            </p>
+            <p>
+              <br />I love you Jessica! Happy anniversary :)
+            </p>
             <p>If anything ever breaks, send an email to: aas363@cornell.edu</p>
             <p>
               All rights reserved by Arunabh Sarkar <br />
