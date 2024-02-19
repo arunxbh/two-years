@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { FiMail, FiX, FiInfo } from "react-icons/fi";
 import youtubeData from "../content/video_ids.json";
+//swapped for aesthetics
+import arunabh from "../content/avatar-jessica.png";
+import jessica from "../content/avatar-arunabh.png";
 
 // 972212fd000b41b9bfcf33a1eaa6be23 API key for https://newsapi.org/docs/endpoints/everything, embed later in new button on "all knowing button"
 
@@ -320,7 +323,10 @@ function HomePage() {
       <button className="infoIcon" onClick={() => setIsInfoOpen(!isInfoOpen)}>
         <FiInfo size={24} />
       </button>
-
+      <div className="avatarsContainer">
+        <img src={jessica} alt="Avatar 1" className="avatar" />
+        <img src={arunabh} alt="Avatar 2" className="avatar" />
+      </div>
       {isInfoOpen && (
         <div className="infoFrame">
           <button

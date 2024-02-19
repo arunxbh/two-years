@@ -450,3 +450,16 @@ body {
   height: 100%; /* Make the iframe take the full height of the .videoFrame */
 }
 
+.avatarsContainer {
+  position: absolute;
+  bottom: 35%; /* Adjust based on your layout */
+  left: 52%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust centering based on the actual size of your images */
+  z-index: 10; /* Ensure it's above other content if necessary */
+}
+
+.avatar {
+  width: 100px; /* Adjust based on your needs */
+  height: auto; /* Maintain aspect ratio */
+  margin: 0 -25px; /* Adjust spacing between avatars */
+}
