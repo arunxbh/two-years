@@ -407,6 +407,12 @@ body {
   margin-bottom: 1em; /* Add some space between paragraphs */
 }
 
+.disclaimer {
+  font-family: 'Press Start 2P';
+  font-size: 1%;
+  margin-top: 150px;
+}
+
 .eightBallIcon {
   position: fixed;
   bottom: 20px;

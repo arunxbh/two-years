@@ -364,6 +364,7 @@ function HomePage() {
             {/* Render different content based on the content state */}
             {content && content.type === "riddle" && (
               <>
+                <h3>Solve this riddle Miss Smarty Pants B.S. D.D.S!</h3>
                 <p>{content.text}</p>
                 {showAnswer && <p>{content.answer}</p>}
                 <button
@@ -390,6 +391,10 @@ function HomePage() {
                 >
                   {showAnswer ? "Hide Punchline" : "Show Punchline"}
                 </button>
+                <p className="disclaimer">
+                  If the joke is inappropriate: I sincerely apologize, it is out
+                  of my control
+                </p>
               </>
             )}
 
