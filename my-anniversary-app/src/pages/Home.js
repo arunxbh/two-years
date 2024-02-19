@@ -398,7 +398,21 @@ function HomePage() {
               </>
             )}
 
-            {content && content.type === "joke-single" && <p>{content.joke}</p>}
+            {content && content.type === "joke-single" && (
+              <>
+                <h3>Jokersville</h3>
+                <p>
+                  You're bored? Ok well, we all know I am the funny one in the
+                  relationship, so just imagine my voice when reading this joke
+                  and try not to laugh too hard!
+                </p>
+                <p>{content.joke}</p>
+                <p className="disclaimer">
+                  If the joke is inappropriate: I sincerely apologize, it is out
+                  of my control
+                </p>
+              </>
+            )}
             {content && content.type === "advice" && (
               <>
                 <h3>Advice Hub:</h3>
@@ -436,7 +450,6 @@ function HomePage() {
                 )}
               </>
             )}
-
             {content && content.type === "activity" && (
               <>
                 <p>
