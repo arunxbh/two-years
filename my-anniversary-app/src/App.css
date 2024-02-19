@@ -424,3 +424,22 @@ body {
   font-size: 24px; /* Size of the icon inside the button */
 }
 
+.videoFrame {
+  position: absolute; /* Position absolutely within a relative container */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Offset the position for exact centering */
+  width: 90%; /* Set width to a percentage of the container for responsiveness */
+  height: 0; /* Set height to 0 and use padding to maintain aspect ratio */
+  padding-top: 50.85%; /* Aspect ratio for the video, 16:9 in this case (height/width*100%) */
+  overflow: hidden; /* Hide anything that goes outside the container */
+}
+
+.videoFrame iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Make the iframe take the full width of the .videoFrame */
+  height: 100%; /* Make the iframe take the full height of the .videoFrame */
+}
+

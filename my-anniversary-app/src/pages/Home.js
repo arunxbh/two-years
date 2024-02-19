@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FiMail, FiX, FiInfo } from "react-icons/fi";
-import { Bs8Circle } from "react-icons/bs";
+import youtubeData from "../content/video_ids.json";
 
 function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -76,8 +76,20 @@ function HomePage() {
       case "Overwhelmed":
         fetchAnimalImage(); // Call the new function to fetch a random animal image
         break;
+      case "Nostalgic":
+        fetchYoutubeVideo();
+        break;
       // Add other cases for different emotions and their corresponding API calls
     }
+  };
+
+  const fetchYoutubeVideo = () => {
+    const randomIndex = Math.floor(Math.random() * youtubeData.length);
+    const videoId = youtubeData[randomIndex];
+    setContent({
+      type: "youtube",
+      id: videoId,
+    });
   };
 
   const fetchRiddle = () => {
@@ -211,6 +223,21 @@ function HomePage() {
                 />
               </div>
             )}
+            {content && content.type === "youtube" && (
+              <div className="imageText">
+                I hope you can still jam out to this song!
+                <div className="videoFrame">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${content.id}?autoplay=1`}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+            )}
+
             {content && content.type === "reading" && <p>{content.text}</p>}
           </div>
         </div>
