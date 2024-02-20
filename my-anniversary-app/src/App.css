@@ -498,3 +498,16 @@ body {
   font-size: 0.8rem; /* Adjust to match the size in your project */
   text-align: center;
 }
+
+.eightBallIcon {
+  position: fixed;
+  bottom: 20px;
+  right: 80px; /* Adjust based on the exact positioning you need */
+  background-color: #ffb7c5;
+  color: #432b49;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 100; /* Ensure it's above the parchment menu */
+}

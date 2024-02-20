@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FiMail, FiX, FiInfo } from "react-icons/fi";
 import youtubeData from "../content/video_ids.json";
+import cuteData from "../content/cute_vids.json";
 //swapped for aesthetics
 import arunabh from "../content/avatar-jessica.png";
 import jessica from "../content/avatar-arunabh.png";
@@ -18,6 +19,9 @@ function HomePage() {
   const [isPasswordProtected, setIsPasswordProtected] = useState(true);
   const [passwordInput, setPasswordInput] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [isEightBallFrameVisible, setIsEightBallFrameVisible] = useState(false);
+  const [eightBallAnswer, setEightBallAnswer] = useState("");
+  const [userQuestion, setUserQuestion] = useState("");
 
   useEffect(() => {
     const calculateTimePassed = () => {
@@ -119,8 +123,11 @@ function HomePage() {
         break;
       case "Overwhelmed":
         const isAnimal = Math.random() < 0.5; // 50% chance for each
+        const isCuteVideo = Math.random() < 0.33;
         if (isAnimal) {
           fetchAnimalImage();
+        } else if (isCuteVideo) {
+          fetchCuteVideo();
         } else {
           fetchAdvice();
         }
@@ -130,6 +137,23 @@ function HomePage() {
         break;
       // Add other cases for different emotions and their corresponding API calls
     }
+  };
+
+  const submitEightBallQuestion = () => {
+    const apiUrl = `https://eightballapi.com/api/biased?question=${encodeURIComponent(
+      userQuestion
+    )}&lucky=false`;
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        setEightBallAnswer(data.answer); // Assuming 'data.answer' is the response structure
+        // Optionally reset userQuestion here if you want to clear the input after submission
+        // setUserQuestion("");
+      })
+      .catch((error) => {
+        console.error("Error fetching eight ball answer:", error);
+        setEightBallAnswer("Failed to fetch eight ball answer.");
+      });
   };
 
   const handlePasswordCheck = (event) => {
@@ -246,6 +270,15 @@ function HomePage() {
     const videoId = youtubeData[randomIndex];
     setContent({
       type: "youtube",
+      id: videoId,
+    });
+  };
+
+  const fetchCuteVideo = () => {
+    const randomIndex = Math.floor(Math.random() * youtubeData.length);
+    const videoId = cuteData[randomIndex];
+    setContent({
+      type: "cutie",
       id: videoId,
     });
   };
@@ -544,8 +577,49 @@ function HomePage() {
                 </div>
               </div>
             )}
+            {content && content.type === "cutie" && (
+              <div className="imageText">
+                I hope you enjoy this cutie video!
+                <div className="videoFrame">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${content.id}?autoplay=1`}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+            )}
 
             {content && content.type === "reading" && <p>{content.text}</p>}
+          </div>
+        </div>
+      )}
+      {isEightBallFrameVisible && (
+        <div className="parchmentMenu">
+          <button
+            onClick={() => setIsEightBallFrameVisible(false)}
+            className="closeButton"
+          >
+            <FiX size={24} />
+          </button>
+          <div className="content">
+            <h3>Ask the Eight Ball:</h3>
+            <input
+              type="text"
+              value={userQuestion}
+              onChange={(e) => setUserQuestion(e.target.value)}
+              placeholder="Type your question"
+              className="questionInput"
+            />
+            <button
+              onClick={submitEightBallQuestion}
+              className="submitQuestionButton"
+            >
+              Spin the 8 ball!
+            </button>
+            {eightBallAnswer && <p>{eightBallAnswer}</p>}
           </div>
         </div>
       )}
@@ -553,6 +627,13 @@ function HomePage() {
       <button className="mailIcon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         <FiMail size={24} />
       </button>
+      <button
+        className="eightBallIcon"
+        onClick={() => setIsEightBallFrameVisible(!isMenuOpen)}
+      >
+        8
+      </button>
+
       <div className="timer">{timePassed}</div>
       {isMenuOpen && (
         <div className="parchmentMenu">
