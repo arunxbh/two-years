@@ -139,21 +139,36 @@ function HomePage() {
     }
   };
 
+  const MagicAnswers = [
+    { id: 0, text: "It is certain.", type: "affirmative" },
+    { id: 1, text: "It is decidedly so.", type: "affirmative" },
+    { id: 2, text: "Without a doubt.", type: "affirmative" },
+    { id: 3, text: "Yes – definitely.", type: "affirmative" },
+    { id: 4, text: "You may rely on it.", type: "affirmative" },
+    { id: 5, text: "As I see it, yes.", type: "affirmative" },
+    { id: 6, text: "Most likely.", type: "affirmative" },
+    { id: 7, text: "Outlook good.", type: "affirmative" },
+    { id: 8, text: "Yes.", type: "affirmative" },
+    { id: 9, text: "Signs point to yes.", type: "affirmative" },
+    { id: 10, text: "Reply hazy, try again.", type: "neutral" },
+    { id: 11, text: "Ask again later.", type: "neutral" },
+    { id: 12, text: "Better not tell you now.", type: "neutral" },
+    { id: 13, text: "Cannot predict now.", type: "neutral" },
+    { id: 14, text: "Concentrate and ask again.", type: "neutral" },
+    { id: 15, text: "Don't count on it.", type: "negative" },
+    { id: 16, text: "My reply is no.", type: "negative" },
+    { id: 17, text: "My sources say no.", type: "negative" },
+    { id: 18, text: "Outlook not so good.", type: "negative" },
+    { id: 19, text: "Very doubtful.", type: "negative" },
+  ];
+
   const submitEightBallQuestion = () => {
-    const apiUrl = `https://eightballapi.com/api/biased?question=${encodeURIComponent(
-      userQuestion
-    )}&lucky=false`;
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        setEightBallAnswer(data.answer); // Assuming 'data.answer' is the response structure
-        // Optionally reset userQuestion here if you want to clear the input after submission
-        // setUserQuestion("");
-      })
-      .catch((error) => {
-        console.error("Error fetching eight ball answer:", error);
-        setEightBallAnswer("Failed to fetch eight ball answer.");
-      });
+    // Select a random answer from the MagicAnswers array
+    const randomIndex = Math.floor(Math.random() * MagicAnswers.length);
+    const randomAnswer = MagicAnswers[randomIndex].text;
+
+    // Set the eightBallAnswer state to the selected answer
+    setEightBallAnswer(randomAnswer);
   };
 
   const handlePasswordCheck = (event) => {
@@ -605,21 +620,28 @@ function HomePage() {
             <FiX size={24} />
           </button>
           <div className="content">
-            <h3>Ask the Eight Ball:</h3>
+            <h1>Ask the Eight Ball:</h1>
             <input
               type="text"
               value={userQuestion}
               onChange={(e) => setUserQuestion(e.target.value)}
               placeholder="Type your question"
-              className="questionInput"
+              className="passwordInput"
             />
             <button
               onClick={submitEightBallQuestion}
-              className="submitQuestionButton"
+              className="submitPasswordButton"
             >
-              Spin the 8 ball!
+              What should I do?
             </button>
-            {eightBallAnswer && <p>{eightBallAnswer}</p>}
+            {eightBallAnswer && (
+              <h3>
+                Reading:
+                <br />
+                <br />
+                {eightBallAnswer}
+              </h3>
+            )}
           </div>
         </div>
       )}

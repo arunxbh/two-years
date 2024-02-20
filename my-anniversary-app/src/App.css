@@ -505,9 +505,10 @@ body {
   right: 80px; /* Adjust based on the exact positioning you need */
   background-color: #ffb7c5;
   color: #432b49;
-  border: none;
-  border-radius: 50%;
-  padding: 10px;
+  border-radius: 50%; /* Make it round */
+  width: 48px; /* Width of the button */
+  height: 48px; /* Height of the button */
+  padding:10px;
   cursor: pointer;
   z-index: 100; /* Ensure it's above the parchment menu */
 }
