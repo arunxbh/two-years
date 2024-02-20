@@ -501,6 +501,7 @@ body {
 
 .eightBallIcon {
   position: fixed;
+  font-family: 'Press Start 2P', cursive;
   bottom: 20px;
   right: 80px; /* Adjust based on the exact positioning you need */
   background-color: #ffb7c5;

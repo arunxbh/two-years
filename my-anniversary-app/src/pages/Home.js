@@ -166,9 +166,9 @@ function HomePage() {
     // Select a random answer from the MagicAnswers array
     const randomIndex = Math.floor(Math.random() * MagicAnswers.length);
     const randomAnswer = MagicAnswers[randomIndex].text;
-
-    // Set the eightBallAnswer state to the selected answer
     setEightBallAnswer(randomAnswer);
+
+    setUserQuestion("");
   };
 
   const handlePasswordCheck = (event) => {
@@ -614,7 +614,10 @@ function HomePage() {
       {isEightBallFrameVisible && (
         <div className="parchmentMenu">
           <button
-            onClick={() => setIsEightBallFrameVisible(false)}
+            onClick={() => {
+              setIsEightBallFrameVisible(false);
+              setEightBallAnswer("");
+            }}
             className="closeButton"
           >
             <FiX size={24} />
@@ -651,7 +654,7 @@ function HomePage() {
       </button>
       <button
         className="eightBallIcon"
-        onClick={() => setIsEightBallFrameVisible(!isMenuOpen)}
+        onClick={() => setIsEightBallFrameVisible(!isEightBallFrameVisible)}
       >
         8
       </button>
