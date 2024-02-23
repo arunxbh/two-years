@@ -613,7 +613,7 @@ function HomePage() {
             )}
             {content && content.type === "memory" && (
               <div className="imageContainer">
-                <div className="imageText">Here's a cutie picta :)</div>
+                <div className="imageText">Remember this? :)</div>
                 <img
                   alt={content.text}
                   src={content.imageUrl}
