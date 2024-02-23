@@ -5,6 +5,7 @@ import cuteData from "../content/cute_vids.json";
 //swapped for aesthetics
 import arunabh from "../content/avatar-jessica.png";
 import jessica from "../content/avatar-arunabh.png";
+import memories from "../content/jess-pics.json";
 
 // 972212fd000b41b9bfcf33a1eaa6be23 API key for https://newsapi.org/docs/endpoints/everything, embed later in new button on "all knowing button"
 
@@ -22,6 +23,20 @@ function HomePage() {
   const [isEightBallFrameVisible, setIsEightBallFrameVisible] = useState(false);
   const [eightBallAnswer, setEightBallAnswer] = useState("");
   const [userQuestion, setUserQuestion] = useState("");
+
+  const selectRandomMemory = () => {
+    const randomIndex = Math.floor(Math.random() * memories.length);
+    return memories[randomIndex];
+  };
+
+  const handleShowRandomMemory = () => {
+    const randomMemory = selectRandomMemory();
+    setContent({
+      type: "memory",
+      text: randomMemory.caption,
+      imageUrl: randomMemory.link,
+    });
+  };
 
   useEffect(() => {
     const calculateTimePassed = () => {
@@ -133,9 +148,13 @@ function HomePage() {
         }
         break;
       case "Nostalgic":
-        fetchYoutubeVideo();
+        const isVideo = Math.random() < 0.5; // 50% chance for each
+        if (isVideo) {
+          fetchYoutubeVideo();
+        } else {
+          handleShowRandomMemory();
+        }
         break;
-      // Add other cases for different emotions and their corresponding API calls
     }
   };
 
@@ -590,6 +609,17 @@ function HomePage() {
                     allowFullScreen
                   ></iframe>
                 </div>
+              </div>
+            )}
+            {content && content.type === "memory" && (
+              <div className="imageContainer">
+                <div className="imageText">Here's a cutie picta :)</div>
+                <img
+                  alt={content.text}
+                  src={content.imageUrl}
+                  className="memoryImage"
+                ></img>
+                <p>{content.text}</p>
               </div>
             )}
             {content && content.type === "cutie" && (

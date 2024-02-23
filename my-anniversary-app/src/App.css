@@ -338,6 +338,12 @@ body {
   border-radius: 8px; /* Optional, for styled corners */
 }
 
+.memoryImage {
+  max-width: 100%; /* Ensure it fits in the frame */
+  max-height: 300px;
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 8px; /* Optional, for styled corners */
+}
 
 .emotionButtons {
   display: grid;
