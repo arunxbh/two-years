@@ -891,50 +891,57 @@ function HomePage() {
               <br />
               <br />
               <p>
-                <p>To Jessica,</p>
-                <br /> As I sit down to write this letter, my mind is flooded
-                with memories of our journey together. Each moment we've shared
-                is a precious thread in the tapestry of our story, a story that
-                began with a shy hello and blossomed into a life shared in love.
-                <br />
-                <br /> I remember the laughter that filled the air on our first
-                date, a sound so sweet it still echoes in my heart. Those early
-                days were like a dance, each step bringing us closer, each twirl
-                revealing more of who we are.
-                <br />
-                <br /> With every challenge we faced, we found strength in each
-                other. Our love, a beacon of hope, guided us through storms and
-                led us to clearer skies. Your resilience inspires me, your
-                kindness lifts me, and your love sustains me.
-                <br />
-                <br /> The way you smile, the way you care, the way you give so
-                selflessly, it all makes me fall in love with you more every
-                day. You are my rock, my comfort, and my endless joy.
-                <br />
-                <br /> The quiet moments we share, simple and unassuming, have
-                become my sanctuary. Whether it's a whispered word or a silent
-                embrace, these are the times when I feel our souls speak the
-                same language.
                 <br />
                 <br />
-                Our love is a canvas painted with vibrant colors of joy, deep
-                hues of passion, and gentle strokes of understanding. Each day
-                adds another brushstroke, another memory, another reason to love
-                you.
                 <br />
-                <br /> On this special day, I want to promise you again, my
-                heart, my loyalty, and my life. You are my past, my present, and
-                my future. There's nothing we can't face together.
                 <br />
-                <br /> As I write the closing lines of this letter, know that it
-                is not an end, but a continuation. Our journey is still
-                unfolding, and I look forward to every step, every challenge,
-                and every triumph with you by my side.
+                <p>Dear Jessica,</p>
+                <br /> It has been two years since you said yes to being my
+                girlfriend in Cascadilla Hall at a few minutes past midnight on
+                the 27th of February. Everyday since then, has been an adventure
+                and I am so grateful to have shared it with you. You are without
+                a doubt the kindest, sweetest, most caring, and thoughtful
+                person I have ever met. I am so grateful to be able to say I am
+                your boyfriend.
+                <br />
+                <br /> When we first met (virtually) before coming to Cornell, I
+                had a feeling we were going to be close. After our first
+                conversation, I had an unexplained spark of joy; I didn’t know
+                why I felt so good to be talking to you but I knew that I didn’t
+                want that feeling to fade away. The following two months we
+                texted day after day and I learned more and more about you,
+                little did I know I was only just getting to know the girl I
+                would fall in love with.
+                <br />
+                <br /> I have loved every moment spent with you. From the late
+                nights we spent in Upson as sophomores, to the early mornings
+                waking up to your face in the Phi Delt house, to the evenings
+                spent in dining halls having dinner together every day as
+                seniors, I have cherished and will continue to cherish all the
+                quality time I get to spend with you.
+                <br />
+                <br /> As I look back at these two years together, I can’t help
+                but think of all the things we have conquered together. We have
+                met with and overcome so many things and I know that if there is
+                anyone I want to fight these battles with now and in the future,
+                it is you my love. You are the best partner in crime anyone
+                could ask for. Together, it feels like we are undefeatable in
+                the face of any adversary.
+                <br />
+                <br /> To celebrate and commemorate our two year anniversary, I
+                started working on this little project towards the middle of
+                winter break. I wanted to make a website that would celebrate us
+                and that you could use for funzies whenever you were bored or
+                wanted something to do! I hope you enjoy it :)
+                <br />
+                <br /> I am excited for all that the future holds and I am
+                excited for all the surprises, challenges, and accomplishments
+                we will take on together. I love you so much Jessica! MWAAAAAAAH
                 <br />
               </p>
               <br />
               <p>
-                Love,
+                With all my love,
                 <br />
                 Arunabh
               </p>{" "}
