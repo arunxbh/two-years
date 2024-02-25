@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { FiMail, FiX, FiInfo } from "react-icons/fi";
+import { FiMail, FiX, FiInfo, FiVolume2, FiVolumeX } from "react-icons/fi";
+import { FaBookOpen } from "react-icons/fa6";
 import youtubeData from "../content/video_ids.json";
 import cuteData from "../content/cute_vids.json";
+import finVid from "../content/financial_literacy_vids.json";
+import mango from "../content/mangobutt.json";
+import usnews from "../content/us_news.json";
+import worldnews from "../content/world_news.json";
 //swapped for aesthetics
 import arunabh from "../content/avatar-jessica.png";
 import jessica from "../content/avatar-arunabh.png";
 import memories from "../content/jess-pics.json";
-
-// 972212fd000b41b9bfcf33a1eaa6be23 API key for https://newsapi.org/docs/endpoints/everything, embed later in new button on "all knowing button"
 
 function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,8 +24,10 @@ function HomePage() {
   const [passwordInput, setPasswordInput] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [isEightBallFrameVisible, setIsEightBallFrameVisible] = useState(false);
+  const [isZoomVisible, setIsZoomVisible] = useState(false);
   const [eightBallAnswer, setEightBallAnswer] = useState("");
   const [userQuestion, setUserQuestion] = useState("");
+  const [isMuted, setIsMuted] = useState(false);
 
   const selectRandomMemory = () => {
     const randomIndex = Math.floor(Math.random() * memories.length);
@@ -118,27 +123,39 @@ function HomePage() {
 
     switch (emotion) {
       case "Bored":
-        const isActivity = Math.random() < 0.33; // One third chance for each
-        const isDrink = Math.random() < 0.5; // Adjust the randomization logic if necessary
+        const isActivity = Math.random() < 0.25; // One third chance for each
+        const isDrink = Math.random() < 0.33; // Adjust the randomization logic if necessary
+        const isJoke = Math.random() < 0.5;
         if (isActivity) {
           fetchBoredActivity();
         } else if (isDrink) {
           fetchDrinkRecipe();
-        } else {
+        } else if (isJoke) {
           fetchJoke();
+        } else {
+          fetchMangoVideo();
         }
         break;
       case "Curious":
-        const isRiddle = Math.random() < 0.5; // Randomly choose between riddle and fun fact
+        const isRiddle = Math.random() < 0.2; // Randomly choose between riddle and fun fact
+        const isFunFact = Math.random() < 0.25;
+        const isUSNews = Math.random() < 0.33;
+        const isWorldNews = Math.random() < 0.5;
         if (isRiddle) {
           fetchRiddle();
-        } else {
+        } else if (isFunFact) {
           fetchFunFact();
+        } else if (isUSNews) {
+          fetchUSNewsVideo();
+        } else if (isWorldNews) {
+          fetchWorldNewsVideo();
+        } else {
+          fetchFinVideo();
         }
         break;
       case "Overwhelmed":
-        const isAnimal = Math.random() < 0.5; // 50% chance for each
-        const isCuteVideo = Math.random() < 0.33;
+        const isAnimal = Math.random() < 0.33; // 50% chance for each
+        const isCuteVideo = Math.random() < 0.5;
         if (isAnimal) {
           fetchAnimalImage();
         } else if (isCuteVideo) {
@@ -180,6 +197,60 @@ function HomePage() {
     { id: 18, text: "Outlook not so good.", type: "negative" },
     { id: 19, text: "Very doubtful.", type: "negative" },
   ];
+
+  const fetchYoutubeVideo = () => {
+    const randomIndex = Math.floor(Math.random() * youtubeData.length);
+    const videoId = youtubeData[randomIndex];
+    setContent({
+      type: "youtube",
+      id: videoId,
+    });
+  };
+
+  const fetchCuteVideo = () => {
+    const randomIndex = Math.floor(Math.random() * cuteData.length);
+    const videoId = cuteData[randomIndex];
+    setContent({
+      type: "cutie",
+      id: videoId,
+    });
+  };
+
+  const fetchFinVideo = () => {
+    const randomIndex = Math.floor(Math.random() * finVid.length);
+    const videoId = finVid[randomIndex];
+    setContent({
+      type: "fin",
+      id: videoId,
+    });
+  };
+
+  const fetchMangoVideo = () => {
+    const randomIndex = Math.floor(Math.random() * mango.length);
+    const videoId = mango[randomIndex];
+    setContent({
+      type: "mango",
+      id: videoId,
+    });
+  };
+
+  const fetchUSNewsVideo = () => {
+    const randomIndex = Math.floor(Math.random() * usnews.length);
+    const videoId = usnews[randomIndex];
+    setContent({
+      type: "usnews",
+      id: videoId,
+    });
+  };
+
+  const fetchWorldNewsVideo = () => {
+    const randomIndex = Math.floor(Math.random() * worldnews.length);
+    const videoId = worldnews[randomIndex];
+    setContent({
+      type: "worldnews",
+      id: videoId,
+    });
+  };
 
   const submitEightBallQuestion = () => {
     // Select a random answer from the MagicAnswers array
@@ -297,24 +368,6 @@ function HomePage() {
           text: "Failed to fetch activity.",
         });
       });
-  };
-
-  const fetchYoutubeVideo = () => {
-    const randomIndex = Math.floor(Math.random() * youtubeData.length);
-    const videoId = youtubeData[randomIndex];
-    setContent({
-      type: "youtube",
-      id: videoId,
-    });
-  };
-
-  const fetchCuteVideo = () => {
-    const randomIndex = Math.floor(Math.random() * youtubeData.length);
-    const videoId = cuteData[randomIndex];
-    setContent({
-      type: "cutie",
-      id: videoId,
-    });
   };
 
   const fetchRiddle = () => {
@@ -636,6 +689,62 @@ function HomePage() {
                 </div>
               </div>
             )}
+            {content && content.type === "fin" && (
+              <div className="imageText">
+                Here's a video about finances!
+                <div className="videoFrame">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${content.id}?autoplay=1`}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+            )}
+            {content && content.type === "mango" && (
+              <div className="imageText">
+                Bored? Enjoy this MissMangoButt video :)
+                <div className="videoFrame">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${content.id}?autoplay=1`}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+            )}
+            {content && content.type === "usnews" && (
+              <div className="imageText">
+                Here's a video about US News!
+                <div className="videoFrame">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${content.id}?autoplay=1`}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+            )}
+            {content && content.type === "worldnews" && (
+              <div className="imageText">
+                Here's a video about World News!
+                <div className="videoFrame">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${content.id}?autoplay=1`}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
+            )}
 
             {content && content.type === "reading" && <p>{content.text}</p>}
           </div>
@@ -678,7 +787,71 @@ function HomePage() {
           </div>
         </div>
       )}
-
+      {isZoomVisible && (
+        <div className="zoom">
+          <button
+            onClick={() => {
+              setIsZoomVisible(false);
+            }}
+            className="closeButton"
+          >
+            <FiX size={24} />
+          </button>
+          <div className="content">
+            <div className="videoChatOne">
+              <iframe
+                src={`https://www.youtube.com/embed/mWY81fGPDh0?autoplay=1&mute=1&loop=1`}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <div className="videoChatTwo">
+              <iframe
+                src={`https://www.youtube.com/embed/ms-Tr0GbVAY?autoplay=1&mute=1&loop=1`}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <div className="videoChatThree">
+              <iframe
+                src={`https://www.youtube.com/embed/HFUrbHUzDik?autoplay=1&mute=1&loop=1`}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+            <div className="videoChatFour">
+              <iframe
+                src={`https://www.youtube.com/embed/J4JUJyR5l8U?autoplay=1&mute=1&loop=1`}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+            {isMuted && (
+              <audio
+                id="background-audio"
+                src="my-anniversary-app/src/content/music/lofi.mp3"
+                loop
+              >
+                Your browser does not support the audio element.
+              </audio>
+            )}
+          </div>
+        </div>
+      )}
+      <button
+        className="zoomIcon"
+        onClick={() => setIsZoomVisible(!isZoomVisible)}
+      >
+        <FaBookOpen size={24} />
+      </button>
       <button className="mailIcon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         <FiMail size={24} />
       </button>

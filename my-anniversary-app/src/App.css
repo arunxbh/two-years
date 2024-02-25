@@ -439,6 +439,19 @@ body {
   font-size: 24px; /* Size of the icon inside the button */
 }
 
+.zoomIcon {
+  position: fixed;
+  bottom: 20px;
+  right: 146px;
+  background-color: #ffb7c5;
+  color: #432b49;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 100; /* Ensure it's above the parchment menu */
+}
+
 .videoFrame {
   position: absolute; /* Position absolutely within a relative container */
   top: 50%; /* Center vertically */
@@ -518,4 +531,124 @@ body {
   padding:10px;
   cursor: pointer;
   z-index: 100; /* Ensure it's above the parchment menu */
+}
+
+.zoom {
+  position: absolute; /* Changed to absolute for centering in the flex container */
+  width: 95%;
+  height: 83%; /* Adjust height as needed */
+  top: 1%;
+  right: 1%;
+  background-color: #fff5e4;
+  border: 2px solid #000000;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center the text vertically */
+  text-align: left; /* Center the text horizontally */
+  overflow-y: auto; /* Add scroll for longer texts */
+  z-index: 100;
+}
+
+.zoom p {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1%;
+  margin: 0; /* Remove default margins */
+}
+
+.videoChatOne {
+  position: absolute; /* Position absolutely within a relative container */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Offset the position for exact centering */
+  width: 90%; /* Set width to a percentage of the container for responsiveness */
+  height: 0; /* Set height to 0 and use padding to maintain aspect ratio */
+  padding-top: 50.85%; /* Aspect ratio for the video, 16:9 in this case (height/width*100%) */
+  overflow: hidden; /* Hide anything that goes outside the container */
+}
+
+.videoChatOne iframe {
+  position: absolute;
+  top: 30px;
+  left: 70px;
+  width: 45%; /* Make the iframe take the full width of the .videoFrame */
+  height: 45%; /* Make the iframe take the full height of the .videoFrame */
+}
+
+.videoChatTwo {
+  position: absolute; /* Position absolutely within a relative container */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Offset the position for exact centering */
+  width: 90%; /* Set width to a percentage of the container for responsiveness */
+  height: 0; /* Set height to 0 and use padding to maintain aspect ratio */
+  padding-top: 50.85%; /* Aspect ratio for the video, 16:9 in this case (height/width*100%) */
+  overflow: hidden; /* Hide anything that goes outside the container */
+}
+
+.videoChatTwo iframe {
+  position: absolute;
+  top: 30px;
+  left: 650px;
+  width: 45%; /* Make the iframe take the full width of the .videoFrame */
+  height: 45%; /* Make the iframe take the full height of the .videoFrame */
+}
+
+.videoChatThree {
+  position: absolute; /* Position absolutely within a relative container */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Offset the position for exact centering */
+  width: 90%; /* Set width to a percentage of the container for responsiveness */
+  height: 0; /* Set height to 0 and use padding to maintain aspect ratio */
+  padding-top: 50.85%; /* Aspect ratio for the video, 16:9 in this case (height/width*100%) */
+  overflow: hidden; /* Hide anything that goes outside the container */
+}
+
+.videoChatThree iframe {
+  position: absolute;
+  top: 355px;
+  left: 70px;
+  width: 45%; /* Make the iframe take the full width of the .videoFrame */
+  height: 45%; /* Make the iframe take the full height of the .videoFrame */
+}
+
+.videoChatFour {
+  position: absolute; /* Position absolutely within a relative container */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Offset the position for exact centering */
+  width: 90%; /* Set width to a percentage of the container for responsiveness */
+  height: 0; /* Set height to 0 and use padding to maintain aspect ratio */
+  padding-top: 50.85%; /* Aspect ratio for the video, 16:9 in this case (height/width*100%) */
+  overflow: hidden; /* Hide anything that goes outside the container */
+}
+
+.videoChatFour iframe {
+  position: absolute;
+  top: 355px;
+  left: 650px;
+  width: 45%; /* Make the iframe take the full width of the .videoFrame */
+  height: 45%; /* Make the iframe take the full height of the .videoFrame */
+}
+
+.videoAudio {
+  position: absolute; /* Position absolutely within a relative container */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Offset the position for exact centering */
+  width: 90%; /* Set width to a percentage of the container for responsiveness */
+  height: 0; /* Set height to 0 and use padding to maintain aspect ratio */
+  padding-top: 50.85%; /* Aspect ratio for the video, 16:9 in this case (height/width*100%) */
+  overflow: hidden; /* Hide anything that goes outside the container */
+}
+
+.videoAudio iframe {
+  position: absolute;
+  top: 3055px;
+  left: 6050px;
+  width: 45%; /* Make the iframe take the full width of the .videoFrame */
+  height: 45%; /* Make the iframe take the full height of the .videoFrame */
 }
