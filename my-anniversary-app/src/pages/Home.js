@@ -171,6 +171,8 @@ function HomePage() {
           handleShowRandomMemory();
         }
         break;
+      default:
+        break;
     }
   };
 
