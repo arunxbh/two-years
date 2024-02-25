@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FiMail, FiX, FiInfo, FiVolume2, FiVolumeX } from "react-icons/fi";
+import { FiMail, FiX, FiInfo } from "react-icons/fi";
 import { FaBookOpen } from "react-icons/fa6";
 import youtubeData from "../content/video_ids.json";
 import cuteData from "../content/cute_vids.json";
@@ -7,7 +7,6 @@ import finVid from "../content/financial_literacy_vids.json";
 import mango from "../content/mangobutt.json";
 import usnews from "../content/us_news.json";
 import worldnews from "../content/world_news.json";
-//swapped for aesthetics
 import arunabh from "../content/avatar-jessica.png";
 import jessica from "../content/avatar-arunabh.png";
 import memories from "../content/jess-pics.json";
@@ -165,7 +164,7 @@ function HomePage() {
         }
         break;
       case "Nostalgic":
-        const isVideo = Math.random() < 0.5; // 50% chance for each
+        const isVideo = Math.random() < 0.45; // 45% chance for music, slightly biased
         if (isVideo) {
           fetchYoutubeVideo();
         } else {
@@ -474,10 +473,8 @@ function HomePage() {
             <p>
               - The four buttons on the main page all do differnt things, to
               refresh or get new results, click the button again!
-              <br />- The lightbulb button on the bottom right will give you a
-              bunch of articles about any topic you want to learn about! Just
-              type in a keyword and you will get as much information as one
-              could ever desire.
+              <br />- The book button on the bottom right will open a Zoom-style
+              study session for you!
               <br />- The 8-ball button on the bottom right corner is for
               whenever you are feeling indecisive! Click it to get a second
               opinion
