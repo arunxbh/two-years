@@ -674,8 +674,7 @@ body {
   .emotionText {
     display: none;
 }
-  /* Or tag names */
-  nav, footer {
+  .avatar {
       display: none;
   }
 }
