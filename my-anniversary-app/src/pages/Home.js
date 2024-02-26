@@ -417,19 +417,16 @@ function HomePage() {
       "https://cataas.com/cat?json=true", // Cat API (adjusted to return JSON)
     ];
 
+    const apiUrl = "https://dog.ceo/api/breeds/image/random";
+
     // Select a random API URL
     const randomApiUrl = apiUrls[Math.floor(Math.random() * apiUrls.length)];
 
-    fetch(randomApiUrl)
+    fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        // Depending on the API, the image URL is in a different field
         let imageUrl;
-        if (randomApiUrl.includes("dog.ceo")) {
-          imageUrl = data.message; // For dog API
-        } else if (randomApiUrl.includes("cataas.com")) {
-          imageUrl = `https://cataas.com/cat/${data._id}`;
-        }
+        imageUrl = data.message;
 
         setContent({
           type: "image",
