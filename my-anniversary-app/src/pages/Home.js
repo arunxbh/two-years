@@ -468,6 +468,10 @@ function HomePage() {
             <FiX size={24} />
           </button>
           <div className="infoContent">
+            <p>
+              For best results, please view on a laptop or iPad. Site display is
+              not compatible with most smartphones <br />
+            </p>
             <p>To use this website:</p>
             <p>
               - The four buttons on the main page all do differnt things, to
