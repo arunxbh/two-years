@@ -469,8 +469,8 @@ function HomePage() {
           </button>
           <div className="infoContent">
             <p>
-              For best results, please view on a laptop or iPad. Site display is
-              not compatible with most smartphones <br />
+              For best results, please view in full screen on a laptop or iPad.
+              Site display is not compatible with most smartphones <br />
             </p>
             <p>To use this website:</p>
             <p>
