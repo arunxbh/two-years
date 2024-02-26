@@ -614,7 +614,7 @@ function HomePage() {
                   activity.
                 </p>
                 <p>
-                  and it will you{" "}
+                  and it will cost you{" "}
                   {content.price === 0 ? "nothing" : content.price} dollars!
                 </p>
                 {content.link && (
