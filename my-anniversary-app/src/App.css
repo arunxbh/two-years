@@ -652,3 +652,30 @@ body {
   width: 45%; /* Make the iframe take the full width of the .videoFrame */
   height: 45%; /* Make the iframe take the full height of the .videoFrame */
 }
+
+@media only screen and (max-width: 768px) {
+  .eightBallIcon {
+      display: none;
+  }
+  .zoomIcon {
+    display: none;
+}
+  /* You can add additional elements or classes you want to hide */
+  .mailIcon {
+      display: none;
+  }
+  /* Or use ids */
+  .emotionButton {
+      display: none;
+  }
+  .timer {
+    display: none;
+}
+  .emotionText {
+    display: none;
+}
+  /* Or tag names */
+  nav, footer {
+      display: none;
+  }
+}
